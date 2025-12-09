@@ -144,18 +144,30 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Has materias but no cycle */}
-        {materias.length > 0 && !activeCycle && !needsHoursSetup && (
+        {/* Has materias but no cycle OR cycle exists without materias linked */}
+        {materias.length > 0 && (!activeCycle || (activeCycle && cycleMaterias.length === 0)) && (
           <Card className="border-dashed">
             <CardContent className="py-12 text-center">
               <RefreshCw className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-medium mb-2">Pronto para um novo ciclo?</h3>
+              <h3 className="text-lg font-medium mb-2">
+                {activeCycle ? 'Suas matérias não estão no ciclo atual' : 'Pronto para um novo ciclo?'}
+              </h3>
               <p className="text-muted-foreground mb-6">
-                Crie um novo ciclo de estudos para organizar sua semana.
+                {activeCycle 
+                  ? 'Resete o ciclo para incluir suas matérias no plano de estudos.'
+                  : 'Crie um novo ciclo de estudos para organizar sua semana.'
+                }
               </p>
-              <Button variant="gradient" onClick={() => setShowHoursModal(true)}>
-                Criar Novo Ciclo
-              </Button>
+              {activeCycle ? (
+                <Button variant="gradient" onClick={() => setShowResetConfirm(true)}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Resetar e Atualizar Ciclo
+                </Button>
+              ) : (
+                <Button variant="gradient" onClick={() => setShowHoursModal(true)}>
+                  Criar Novo Ciclo
+                </Button>
+              )}
             </CardContent>
           </Card>
         )}
