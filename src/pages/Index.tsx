@@ -24,7 +24,7 @@ export default function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-main">
+    <div className="min-h-screen bg-gradient-landing">
       {/* Header */}
       <header className="container px-4 py-6 flex items-center justify-between">
         <Logo size="md" />

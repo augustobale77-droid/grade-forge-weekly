@@ -22,6 +22,7 @@ export default function Dashboard() {
     needsHoursSetup,
     totalHoursAssigned,
     totalHoursCompleted,
+    overallProgress,
     createCycle,
     updateHours,
     resetCycle,
@@ -81,9 +82,18 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <ProgressBar
-                current={totalHoursCompleted}
-                total={totalHoursAssigned}
+                current={overallProgress}
+                total={100}
+                showLabel={false}
               />
+              <div className="flex justify-between text-sm mt-2">
+                <span className="text-muted-foreground">
+                  {totalHoursCompleted.toFixed(1)}h / {totalHoursAssigned.toFixed(1)}h
+                </span>
+                <span className={overallProgress >= 100 ? "text-success font-medium" : "text-primary font-medium"}>
+                  {overallProgress.toFixed(0)}%
+                </span>
+              </div>
             </CardContent>
           </Card>
         )}
@@ -128,7 +138,6 @@ export default function Dashboard() {
                   key={cm.id}
                   cycleMateria={cm}
                   onAddHour={(id) => updateHours(id, 1)}
-                  onRemoveHour={(id) => updateHours(id, -1)}
                 />
               ))}
             </div>
