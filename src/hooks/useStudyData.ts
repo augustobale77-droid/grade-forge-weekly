@@ -268,6 +268,17 @@ export function useStudyData() {
   const totalHoursAssigned = cycleMaterias.reduce((sum, cm) => sum + cm.hours_assigned, 0);
   const totalHoursCompleted = cycleMaterias.reduce((sum, cm) => sum + cm.hours_completed, 0);
 
+  // Calculate overall progress as the average of individual materia completion percentages
+  // This ensures 100% only when ALL materias are complete
+  const overallProgress = cycleMaterias.length > 0
+    ? cycleMaterias.reduce((sum, cm) => {
+        const materiaProgress = cm.hours_assigned > 0 
+          ? Math.min(cm.hours_completed / cm.hours_assigned, 1) 
+          : 0;
+        return sum + materiaProgress;
+      }, 0) / cycleMaterias.length * 100
+    : 0;
+
   return {
     materias,
     activeCycle,
@@ -277,6 +288,7 @@ export function useStudyData() {
     needsHoursSetup,
     totalHoursAssigned,
     totalHoursCompleted,
+    overallProgress,
     createCycle,
     updateHours,
     resetCycle,
