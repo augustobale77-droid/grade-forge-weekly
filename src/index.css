@@ -71,8 +71,8 @@
     --sidebar-ring: 206 46% 43%;
 
     /* Custom gradients */
-    --gradient-main: linear-gradient(180deg, #0e2638 0%, #000000 100%);
-    --gradient-landing: linear-gradient(180deg, #1a3a50 0%, #0e2638 50%, #000000 100%);
+    --gradient-main: linear-gradient(180deg, #1a3a50 0%, #0a1c28 100%);
+    --gradient-landing: linear-gradient(180deg, #2a4a60 0%, #1a3a50 50%, #0e2638 100%);
     --gradient-card: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(210 53% 12%) 100%);
     --gradient-primary: linear-gradient(135deg, #3975A3 0%, #2A5B79 100%);
     --gradient-success: linear-gradient(135deg, #53AC48 0%, #3d8a35 100%);
